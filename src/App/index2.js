@@ -22,7 +22,8 @@ class Index2 extends Component {
     //   login: '101',
     //   password: '101.101',
     // }
-    const data = await rpc.login(params);
+    const params1 = { ...params, role: 'player' }
+    const data = await rpc.login(params1);
     if (!data.code && data.result.status === 'ok') {
       this.setState({
         isLogin: true,
@@ -154,10 +155,15 @@ class Index2 extends Component {
 
   // 叫牌，参数是：方位，叫品（都是字符串）
   bid = async (player, card) => {
+    const arg = card.substr(1, 1) === "D" ?
+      [this.state.doing_board_id, player, card, 'True', '这是一个约定叫'] :
+      [this.state.doing_board_id, player, card, 'False', '这不是约定叫']
     const params = {
       model: 'og.board',
       method: 'bid',
-      args: [this.state.doing_board_id, player, card],
+      // args: [this.state.doing_board_id, player, card],
+      args: arg,
+      // args: [this.state.doing_board_id, player, card,'False','这不是约定叫'],
       kwargs: {}
     };
     const data = await rpc.call(params);
@@ -206,7 +212,7 @@ class Index2 extends Component {
     const params = {
       model: 'og.board',
       method: 'claim_ack',
-      args: [this.state.doing_board_id,  claimer, number ],
+      args: [this.state.doing_board_id, claimer, number],
       kwargs: {}
     };
     const data = await rpc.call(params);
