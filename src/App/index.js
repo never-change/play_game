@@ -9,7 +9,7 @@ let options = {
 }
 let rpc = new RPC(options);
 
-let arr = ['a', 'b', 'c', 'd'];
+let arr = ['a', 'b', 'c', 'd', 'e'];
 // let arr = ['a', 'b', 'c', 'd', 'e', 'f',];
 let arr1 = [1, 2, 3, 4];
 // let arr1 = [1, 2, 3, 4, 'x', 'y'];
