@@ -10,8 +10,8 @@ class App extends Component {
     return (
       
       // <Index2 />
-      // <Index />
-      <Organize />
+      <Index />
+      // <Organize />
       // <Test />
     );
   }

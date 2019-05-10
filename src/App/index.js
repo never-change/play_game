@@ -9,8 +9,8 @@ let options = {
 }
 let rpc = new RPC(options);
 
-let arr = ['a', 'b', 'c', 'd', 'e'];
-// let arr = ['a', 'b', 'c', 'd', 'e', 'f',];
+// let arr = ['a', 'b', 'c', 'd', 'e'];
+let arr = ['f', 'g', 'h', 'i', 'j', 'k','l','m','n','o','p','q','r','t','u','v','w','x','z'];
 let arr1 = [1, 2, 3, 4];
 // let arr1 = [1, 2, 3, 4, 'x', 'y'];
 
@@ -32,7 +32,7 @@ class Index extends Component {
 
   createData = async () => {
     arr.forEach(async (item1, index1, array1) => {
-      setTimeout(() => this.createTeam(item1, index1 + 1)
+      setTimeout(() => this.createTeam(item1, index1 + 5)
         .then(team_id => {
 
           arr1.forEach(async (item2, index2, array2) => {
@@ -157,7 +157,7 @@ class Index extends Component {
     const res = await rpc.call({
       model: 'og.game',
       method: 'search',
-      args: [[['name', '=', '桥牌比赛']]],
+      args: [[['name', '=', '测试100遍']]],
       kwargs: {}
     });
     const game_id = res.result[0];

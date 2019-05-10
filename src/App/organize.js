@@ -17,7 +17,8 @@ class Organize extends Component {
 
   // 登录，获取sid,uid
   login = async () => {
-    let params1 = { login: 'admin', password: '123', role: false }
+    let params1 = { login: 's1', password: '123', role: 'player' }
+    // let params1 = { login: 'admin', password: '123', role: false }
     let data = await rpc.login(params1);
     if (data.code || data.result.status !== 'ok') {
       message.error('大哥，您的机票飞到了火星！！！')
@@ -30,7 +31,7 @@ class Organize extends Component {
     const res = await rpc.call({
       model: 'og.game',
       method: 'search',
-      args: [[['name', '=', '桥牌比赛']]],
+      args: [[['name', '=', '测试100遍']]],
       kwargs: {}
     });
     const game_id = res.result[0];
@@ -125,7 +126,8 @@ class Organize extends Component {
     let params = {
       model: 'og.table',
       method: 'sit_down',
-      args: [27, {partner_id:49,team_id:2,pos:'S'}],
+      // args: [2, {partner_id:54,team_id:2,pos:'N'}],
+      args: [2, {partner_id:52,team_id:1,pos:'W'}],
       kwargs: {}
     };
     let res = await rpc.call(params);
@@ -135,25 +137,47 @@ class Organize extends Component {
     let params = {
       model: 'og.table',
       method: 'leave',
-      args: [27, {partner_id:47,player_id:13}],
+      // args: [2, {partner_id:54,player_id:4}],
+      args: [2, {partner_id:52,player_id:20}],
       // args: [27, {partner_id:46,player_id:12}],
       kwargs: {}
     };
     let res = await rpc.call(params);
-    console.log(res.result);
+    console.log(res);
   }
   test4 = async () => {
     let params = {
       model: 'og.table.player',
       method: 'read',
-      args: [20, ['partner_id','online','position']],
+      args: [2, ['partner_id','online','position']],
       // args: [27, {partner_id:46,player_id:12}],
       kwargs: {}
     };
     let res = await rpc.call(params);
     console.log(res.result);
   }
-
+  test123 = async () => {
+    let params = {
+      model: 'og.match',
+      method: 'read2',
+      args: [[1], ['id','name',['table_ids',['id','name',['table_player_ids',['online','position']]]]]],
+      // args: [27, {partner_id:46,player_id:12}],
+      kwargs: {}
+    };
+    let res = await rpc.call(params);
+    console.log(res.result);
+  }
+  testuser = async () => {
+    let params = {
+      model: 'res.users',
+      method: 'read',
+      args: [12, ['name','login','email','partner_id']],
+      // args: [27, {partner_id:46,player_id:12}],
+      kwargs: {}
+    };
+    let res = await rpc.call(params);
+    console.log(res.result);
+  }
 
 
   render() {
@@ -167,6 +191,8 @@ class Organize extends Component {
         <button onClick={this.test2} >离开牌桌</button><hr />
         <button onClick={this.test4} >查看在线状态</button><hr />
         <button onClick={this.arrange} >一轮编排</button><hr />
+        <button onClick={this.test123} >测试</button><hr />
+        <button onClick={this.testuser} >user</button><hr />
       </div>
     );
   }
